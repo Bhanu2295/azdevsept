@@ -1,0 +1,71 @@
+# Download the binary for your system
+sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+
+# Give it permission to execute
+sudo chmod +x /usr/local/bin/gitlab-runner
+
+# Create a GitLab Runner user
+sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
+
+# Install and run as a service
+sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start
+------------------------------------------------------
+gitlab-runner register  --url https://arc.gitlab.bdf-cloud.iqvia.net  --token glrt-XTyhMaBHg3SCY1gzSoy-	
+---------------------------------------------------------
+create a folder 
+mkdir -p ssh /etc/docker/certs.d/rcmregistry.iqvia.com
+
+creata a file ca.crt
+chmod 777 -R .
+
+cd /usr/local/share/ca-certificates/
+vi rcmregistry.iqvia.com.crt
+copy the same ca.crt file in the vi rcmregistry.iqvia.com.crt
+chmod 777 -R .
+
+sudo update-ca-certificates
+
+sudo systemctl status docker
+sudo systemctl restart docker
+
+docker login -u "gitlabarcuser" --password yLr1n5xHWx9XE6oH rcmregistry.iqvia.com/
+
+execute the below commands:
+# Download the binary for your system
+sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+
+# Give it permission to execute
+sudo chmod +x /usr/local/bin/gitlab-runner
+
+# Create a GitLab Runner user
+sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
+
+# Install and run as a service
+sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start
+gitlab-runner restart
+
+And next
+gitlab-runner register  --url https://arc.gitlab.bdf-cloud.iqvia.net  --token glrt-XTyhMaBHg3SCY1gzSoy-
+
+
+vi /etc/gitlab-runner/config.toml
+Make the changes in the file comparing with the earlier versions of the runner
+
+sudo gitlab runner restart
+
+Create: sudo vi /etc/gitlab-runner/harbor.pem
+sudo gitlab-runner restart
+sudo gitlab-runner status
+ 
+crontab -e
+append the below line and save it
+*/2 * * * * /usr/bin/docker system prune -af --volumes
+crontab -l
+
+And finally open gitlab and open runner page
+Edit
+Select the run untagged jobs -> save
+
+
